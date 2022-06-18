@@ -115,3 +115,37 @@ CREATE TABLE evento_reposicao
     PRIMARY KEY(ean,nro,num_serie,fabricante,instante),
     FOREIGN KEY(ean,nro,num_serie,fabricante) references planograma(ean,nro,num_serie,fabricante),
     FOREIGN KEY(tin) references retalhista(tin));
+
+create or replace function cat_fun() returns
+  trigger as $$
+  declare c integer;
+  begin
+    select count(*) into c from tem_outra where tem_outra.super_categoria = new.categoria;
+    if c > 0 then
+      raise exception 'Uma categoria não pode estar contida em si propria'
+      using hint = 'Por favor verifique o nome da categoria.';
+    end if;
+    return new;
+  end;
+$$ language plpgsql;
+
+create or replace function uni_fun() returns
+  trigger as $$
+  declare c integer;
+  begin
+    select count(*) into c from evento_reposicao  where new.unidades > max_unidades where();
+    if c > 0 then
+      raise exception 'Uma categoria não pode estar contida em si propria'
+      using hint = 'Por favor verifique o nome da categoria.';
+    end if;
+    return new;
+  end;
+$$ language plpgsql;
+
+create trigger cat_trg before update on tem_outra for each row execute procedure cat_fun();
+
+create trigger cat_trg before insert on tem_outra for each row execute procedure cat_fun();
+
+create trigger uni_trg before update on evento_reposicao for each row execute procedure uni_fun();
+
+create trigger uni_trg before insert on evento_reposicao for each row execute procedure uni_fun();
