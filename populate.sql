@@ -160,15 +160,15 @@ insert into tem_outra values ('Vegetal', 'Alface');
 insert into tem_outra values ('Chocolate',   'Twix');
 insert into tem_outra values ('Chocolate',	 'Kit kat');
 
-insert into produto values ('1234567890123','Banana da madeira');
-insert into produto values ('2345678901234', 'Gelado oreo');
-insert into produto values ('3456789012345', 'Kit kat max');
-insert into produto values ('4567890123456', 'Melancia de verão');
-insert into produto values ('5678901234567', 'Alface fresca');
-insert into produto values ('6789012345678', 'Cereja fresca');
-insert into produto values ('7890123456789', 'Banana de barco');
-insert into produto values ('8901234567890', 'Bolacha Oreo');
-insert into produto values ('9012345678901', 'Banana de avião');
+insert into produto values ('1234567890123', 'Banana','Banana da madeira');
+insert into produto values ('2345678901234', 'Oreo','Gelado oreo');
+insert into produto values ('3456789012345', 'Kit kat','Kit kat max');
+insert into produto values ('4567890123456', 'Melancia','Melancia de verão');
+insert into produto values ('5678901234567', 'Alface','Alface fresca');
+insert into produto values ('6789012345678', 'Cereja','Cereja fresca');
+insert into produto values ('7890123456789', 'Banana','Banana de barco');
+insert into produto values ('8901234567890', 'Oreo','Bolacha Oreo');
+insert into produto values ('9012345678901', 'Banana','Banana de avião');
 
 insert into tem_categoria values ('1234567890123','Banana');
 insert into tem_categoria values ('2345678901234',	'Bolacha');
