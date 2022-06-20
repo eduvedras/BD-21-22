@@ -37,6 +37,7 @@ CREATE TABLE tem_outra
 
 CREATE TABLE produto
     (ean CHAR(13) NOT NULL,
+    cat VARCHAR(50),
     descr VARCHAR(500),
     PRIMARY KEY (ean),
     FOREIGN KEY (cat) references categoria);
