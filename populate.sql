@@ -32,11 +32,11 @@ CREATE TABLE tem_outra
     categoria VARCHAR(50) NOT NULL,
     PRIMARY KEY (categoria),
     FOREIGN KEY (super_categoria) references super_categoria(nome),
-    FOREIGN KEY (categoria) references categoria(nome)
+    FOREIGN KEY (categoria) references categoria(nome),
     CHECK (super_categoria != categoria));
 
 CREATE TABLE produto
-    (ean CHAR(13) NOT NULL CHECK(ean IN tem_categoria(ean)),
+    (ean CHAR(13) NOT NULL,
     descr VARCHAR(500),
     PRIMARY KEY (ean),
     FOREIGN KEY (cat) references categoria);
@@ -109,7 +109,7 @@ CREATE TABLE evento_reposicao
     num_serie INTEGER,
     fabricante VARCHAR(50),
     instante DATETIME,
-    constraint max_unidades unidades INTEGER,
+    unidades INTEGER,
     tin VARCHAR(50),
     PRIMARY KEY(ean,nro,num_serie,fabricante,instante),
     FOREIGN KEY(ean,nro,num_serie,fabricante) references planograma(ean,nro,num_serie,fabricante),
