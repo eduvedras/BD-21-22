@@ -185,6 +185,13 @@ insert into IVM values (2,	'F2');
 insert into IVM values (3,	'F3');
 insert into IVM values (4,	'F4');
 insert into IVM values (5,	'F5');
+insert into IVM values (6,'F6');
+insert into IVM values (7,	'F7');
+insert into IVM values (8,	'F8');
+insert into IVM values (9,	'F9');
+insert into IVM values (10,	'F10');
+insert into IVM values (11,'F11');
+insert into IVM values (12,	'F12');
 
 insert into ponto_de_retalho values ('Colombo','Lisboa','Lisboa');
 insert into ponto_de_retalho values ('Estadio do Dragão',	'Porto', 'Vila Nova de Gaia');
@@ -219,10 +226,16 @@ insert into retalhista values ('id3','Jorge');
 insert into retalhista values ('id4','Acácio');
 
 insert into responsavel_por values ('id1','Banana',1,'F1');
-insert into responsavel_por values ('id2','Alface',3,'F3');
 insert into responsavel_por values ('id2','Banana',4,'F4');
 insert into responsavel_por values ('id3','Melancia',2,'F2');
 insert into responsavel_por values ('id4','Fruta',5,'F5');
+insert into responsavel_por values ('id2','Cereja',6,'F6');
+insert into responsavel_por values ('id2','Alface',7,'F7');
+insert into responsavel_por values ('id2','Oreo',8,'F8');
+insert into responsavel_por values ('id2','Melão',9,'F9');
+insert into responsavel_por values ('id2','Melancia',10,'F10');
+insert into responsavel_por values ('id2','Twix',11,'F11');
+insert into responsavel_por values ('id2','Kit kat',12,'F12');
 
 insert into evento_reposicao values ('1234567890123',1,1,'F1','2018-7-1 19:42:50',3,'id1');
 insert into evento_reposicao values ('4567890123456',4,2,'F2','2016-8-1 15:42:50',2,'id1');
