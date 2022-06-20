@@ -109,7 +109,7 @@ CREATE TABLE evento_reposicao
     nro INTEGER,
     num_serie INTEGER,
     fabricante VARCHAR(50),
-    instante VARCHAR(20),
+    instante TIMESTAMP,
     unidades INTEGER,
     tin VARCHAR(50),
     PRIMARY KEY(ean,nro,num_serie,fabricante,instante),
@@ -184,16 +184,19 @@ insert into IVM values (1,'F1');
 insert into IVM values (2,	'F2');
 insert into IVM values (3,	'F3');
 insert into IVM values (4,	'F4');
+insert into IVM values (5,	'F5');
 
 insert into ponto_de_retalho values ('Colombo','Lisboa','Lisboa');
 insert into ponto_de_retalho values ('Estadio do Dragão',	'Porto', 'Vila Nova de Gaia');
 insert into ponto_de_retalho values ('Loja do ze',	'Lisboa', 'Torres Vedras');
 insert into ponto_de_retalho values ('Grab and Go',	'Braga', 'Braga');
+insert into ponto_de_retalho values ('Shopping',	'Viseu', 'Viseu');
 
 insert into instalada_em values (1,'F1','Colombo');
 insert into instalada_em values (2,	'F2', 'Estadio do Dragão');
 insert into instalada_em values (3,	'F3', 'Loja do ze');
 insert into instalada_em values (4,	'F4', 'Grab and Go');
+insert into instalada_em values (5,	'F5', 'Shopping');
 
 insert into prateleira values (1,1, 'F1',2,'Banana');
 insert into prateleira values (2,1, 'F1',1,'Melancia');
@@ -203,6 +206,7 @@ insert into prateleira values (5,3,	'F3',2,'Alface');
 insert into prateleira values (6,3,	'F3',3,'Fruta');
 insert into prateleira values (7,4,	'F4',1,'Banana');
 insert into prateleira values (8,4,	'F4',2,'Bolachas');
+insert into prateleira values (9,5,	'F5',1,'Fruta');
 
 insert into planograma values ('1234567890123',1,1,   'F1',2,5,'Colombo');
 insert into planograma values ('4567890123456',4,2,   'F2',3,6,'Estadio do Dragão');
@@ -218,6 +222,7 @@ insert into responsavel_por values ('id1','Banana',1,'F1');
 insert into responsavel_por values ('id2','Alface',3,'F3');
 insert into responsavel_por values ('id2','Banana',4,'F4');
 insert into responsavel_por values ('id3','Melancia',2,'F2');
+insert into responsavel_por values ('id4','Fruta',5,'F5');
 
 insert into evento_reposicao values ('1234567890123',1,1,'F1','2018-7-1 19:42:50',3,'id1');
 insert into evento_reposicao values ('4567890123456',4,2,'F2','2016-8-1 15:42:50',2,'id1');
