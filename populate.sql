@@ -108,7 +108,7 @@ CREATE TABLE evento_reposicao
     nro INTEGER,
     num_serie INTEGER,
     fabricante VARCHAR(50),
-    instante DATETIME,
+    instante VARCHAR(20),
     unidades INTEGER,
     tin VARCHAR(50),
     PRIMARY KEY(ean,nro,num_serie,fabricante,instante),
