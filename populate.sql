@@ -78,7 +78,7 @@ CREATE TABLE prateleira
     FOREIGN KEY(nome) references categoria(nome));
 
 CREATE TABLE planograma
-    (ean CHAR(13),
+    (ean CHAR(13) UNIQUE,
     nro INTEGER,
     num_serie INTEGER,
     fabricante VARCHAR(50),
