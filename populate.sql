@@ -85,7 +85,7 @@ CREATE TABLE planograma
     faces INTEGER,
     unidades INTEGER,
     loc VARCHAR(50),
-    PRIMARY KEY(ean,nro, num_serie, fabricante),
+    PRIMARY KEY(ean, nro, num_serie, fabricante),
     FOREIGN KEY(num_serie, fabricante, nro) references prateleira(num_serie,fabricante,nro),
     FOREIGN KEY(ean) references produto(ean));
 
@@ -220,6 +220,6 @@ insert into responsavel_por values ('id2','Banana',4,'F4');
 insert into responsavel_por values ('id3','Melancia',2,'F2');
 
 insert into evento_reposicao values ('1234567890123',1,1,'F1','2018-7-1 19:42:50',3,'id1');
-insert into evento_reposicao values ('4567890123456',2,1,'F1','2016-8-1 15:42:50',2,'id1');
-insert into evento_reposicao values ('1234567890123',1,4,'F4','2017-8-1 15:42:50',3,'id2');
-insert into evento_reposicao values ('8901234567890',3,1,'F1','2017-8-6 15:42:50',3,'id1');
+insert into evento_reposicao values ('4567890123456',4,2,'F2','2016-8-1 15:42:50',2,'id1');
+insert into evento_reposicao values ('1234567890123',1,1,'F1','2017-8-1 15:42:50',3,'id2');
+insert into evento_reposicao values ('5678901234567',5,3,'F3','2017-8-6 15:42:50',3,'id1');
