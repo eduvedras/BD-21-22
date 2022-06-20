@@ -14,12 +14,12 @@ DROP TABLE IF EXISTS responsavel_por;
 DROP TABLE IF EXISTS evento_reposicao;
 
 CREATE TABLE categoria 
-    (nome VARCHAR(50) NOT NULL CHECK((nome IN categoria_simples AND nome NOT IN super_categoria) OR 
-                                        (nome IN super_categoria AND nome NOT IN categoria_simples)),
+    (nome VARCHAR(50) NOT NULL CHECK((nome IN categoria_simples(nome) AND nome NOT IN super_categoria(nome)) OR 
+                                        (nome IN super_categoria(nome) AND nome NOT IN categoria_simples(nome))),
     PRIMARY KEY (nome));
 
 CREATE TABLE categoria_simples 
-    (nome VARCHAR(50) CHECK(nome NOT IN super_categoria),
+    (nome VARCHAR(50) CHECK(nome NOT IN super_categoria(nome)),
     PRIMARY KEY (nome),
     FOREIGN KEY (nome) references categoria(nome));
 
