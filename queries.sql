@@ -9,3 +9,7 @@ select nome from retalhista where tin = tinRet (
 )
 
 /*3*/
+select ean from produto where ean not in (select ean from evento_reposicao);
+
+/*4*/
+select ean from evento_reposicao group by ean having count(distinct tin) = 1;
