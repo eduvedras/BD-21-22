@@ -78,10 +78,10 @@ CREATE TABLE prateleira
     FOREIGN KEY(nome) references categoria(nome));
 
 CREATE TABLE planograma
-    (ean CHAR(13),
-    nro INTEGER,
-    num_serie INTEGER,
-    fabricante VARCHAR(50),
+    (ean CHAR(13) UNIQUE,
+    nro INTEGER UNIQUE,
+    num_serie INTEGER UNIQUE,
+    fabricante VARCHAR(50) UNIQUE,
     faces INTEGER,
     unidades INTEGER,
     loc VARCHAR(50),
@@ -171,13 +171,13 @@ insert into produto values ('8901234567890', 'Oreo','Bolacha Oreo');
 insert into produto values ('9012345678901', 'Banana','Banana de avião');
 
 insert into tem_categoria values ('1234567890123','Banana');
-insert into tem_categoria values ('2345678901234',	'Bolacha');
+insert into tem_categoria values ('2345678901234',	'Bolachas');
 insert into tem_categoria values ('3456789012345',	'Oreo');
 insert into tem_categoria values ('4567890123456',	'Melancia');
 insert into tem_categoria values ('5678901234567',  'Alface');
 insert into tem_categoria values ('6789012345678',	'Cereja');
 insert into tem_categoria values ('7890123456789',	'Banana');
-insert into tem_categoria values ('8901234567890',	'Bolacha');
+insert into tem_categoria values ('8901234567890',	'Bolachas');
 insert into tem_categoria values ('9012345678901',	'Banana');
 
 insert into IVM values (1,'F1');
