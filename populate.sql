@@ -198,16 +198,16 @@ insert into instalada_em values (4,	'F4', 'Grab and Go');
 insert into prateleira values (1,1, 'F1',2,'Banana');
 insert into prateleira values (2,1, 'F1',1,'Melancia');
 insert into prateleira values (3,1, 'F1',3,'Oreo');
-insert into prateleira values (1,2,	'F2',1,'Melancia');
-insert into prateleira values (1,3,	'F3',2,'Alface');
-insert into prateleira values (1,3,	'F3',3,'Fruta');
-insert into prateleira values (1,4,	'F4',1,'Oreo');
-insert into prateleira values (1,4,	'F4',2,'Bolachas');
+insert into prateleira values (4,2,	'F2',1,'Melancia');
+insert into prateleira values (5,3,	'F3',2,'Alface');
+insert into prateleira values (6,3,	'F3',3,'Fruta');
+insert into prateleira values (7,4,	'F4',1,'Oreo');
+insert into prateleira values (8,4,	'F4',2,'Bolachas');
 
 insert into planograma values ('1234567890123',1,1,   'F1',2,5,'Colombo');
-insert into planograma values ('4567890123456',2,2,   'F2',3,6,'Estadio do Dragão');
-insert into planograma values ('5678901234567',1,3,   'F3',1,4,'Loja do ze');
-insert into planograma values ('3456789012345',3,4,	'F4',3,7, 'Grab and Go');
+insert into planograma values ('4567890123456',4,2,   'F2',3,6,'Estadio do Dragão');
+insert into planograma values ('5678901234567',5,3,   'F3',1,4,'Loja do ze');
+insert into planograma values ('3456789012345',7,4,	'F4',3,7, 'Grab and Go');
 
 insert into retalhista values ('id1','José');
 insert into retalhista values ('id2','João');
