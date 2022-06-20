@@ -14,7 +14,7 @@ DROP TABLE IF EXISTS responsavel_por;
 DROP TABLE IF EXISTS evento_reposicao;
 
 CREATE TABLE categoria 
-    (nome VARCHAR(50) NOT NULL,
+    (nome VARCHAR(50) NOT NULL UNIQUE,
     PRIMARY KEY (nome));
 
 CREATE TABLE categoria_simples 
@@ -36,11 +36,11 @@ CREATE TABLE tem_outra
     CHECK (super_categoria != categoria));
 
 CREATE TABLE produto
-    (ean CHAR(13) NOT NULL,
+    (ean CHAR(13) NOT NULL UNIQUE,
     cat VARCHAR(50),
     descr VARCHAR(500),
     PRIMARY KEY (ean),
-    FOREIGN KEY (cat) references categoria);
+    FOREIGN KEY (cat) references categoria(nome));
 
 CREATE TABLE tem_categoria
     (ean CHAR(13),
@@ -49,8 +49,8 @@ CREATE TABLE tem_categoria
     FOREIGN KEY (nome) references categoria(nome));
 
 CREATE TABLE IVM
-    (num_serie INTEGER,
-    fabricante VARCHAR(50),
+    (num_serie INTEGER UNIQUE,
+    fabricante VARCHAR(50) UNIQUE,
     PRIMARY KEY (num_serie, fabricante));
 
 CREATE TABLE ponto_de_retalho
@@ -68,7 +68,7 @@ CREATE TABLE instalada_em
     FOREIGN KEY(loc) references ponto_de_retalho(nome));
 
 CREATE TABLE prateleira
-    (nro INTEGER,
+    (nro INTEGER UNIQUE,
     num_serie INTEGER,
     fabricante VARCHAR(50),
     altura INTEGER,
@@ -90,7 +90,7 @@ CREATE TABLE planograma
     FOREIGN KEY(ean) references produto(ean));
 
 CREATE TABLE retalhista
-    (tin VARCHAR(50),
+    (tin VARCHAR(50) UNIQUE,
     nome VARCHAR(50) UNIQUE,
     PRIMARY KEY(tin));
 
