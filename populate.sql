@@ -201,7 +201,7 @@ insert into prateleira values (3,1, 'F1',3,'Oreo');
 insert into prateleira values (4,2,	'F2',1,'Melancia');
 insert into prateleira values (5,3,	'F3',2,'Alface');
 insert into prateleira values (6,3,	'F3',3,'Fruta');
-insert into prateleira values (7,4,	'F4',1,'Oreo');
+insert into prateleira values (7,4,	'F4',1,'Banana');
 insert into prateleira values (8,4,	'F4',2,'Bolachas');
 
 insert into planograma values ('1234567890123',1,1,   'F1',2,5,'Colombo');
@@ -215,13 +215,11 @@ insert into retalhista values ('id3','Jorge');
 insert into retalhista values ('id4','Acácio');
 
 insert into responsavel_por values ('id1','Banana',1,'F1');
-insert into responsavel_por values ('id1','Oreo',1,'F1');
 insert into responsavel_por values ('id2','Alface',3,'F3');
-insert into responsavel_por values ('id2','Banana',1,'F1');
+insert into responsavel_por values ('id2','Banana',4,'F4');
 insert into responsavel_por values ('id3','Melancia',2,'F2');
-insert into responsavel_por values ('id4','Bolachas',4,'F4');
 
 insert into evento_reposicao values ('1234567890123',1,1,'F1','2018-7-1 19:42:50',3,'id1');
 insert into evento_reposicao values ('4567890123456',2,1,'F1','2016-8-1 15:42:50',2,'id1');
-insert into evento_reposicao values ('1234567890123',1,1,'F1','2017-8-1 15:42:50',3,'id2');
+insert into evento_reposicao values ('1234567890123',1,4,'F4','2017-8-1 15:42:50',3,'id2');
 insert into evento_reposicao values ('8901234567890',3,1,'F1','2017-8-6 15:42:50',3,'id1');
