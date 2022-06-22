@@ -2,7 +2,7 @@
 from unicodedata import category
 from wsgiref.handlers import CGIHandler
 from flask import Flask
-from flask import render_template, request
+from flask import render_template, request, redirect
 import psycopg2
 import psycopg2.extras
 
@@ -45,46 +45,55 @@ def listar_categorias():
         cursor.close()
         dbConn.close()
 
-'''
-@app.route("/retalhistas")
-def change_balance():
-    try:
-        return render_template("balance.html", params=request.args)
-    except Exception as e:
-        return str(e)
-
-
-@app.route("/IVM")
-def update_balance():
+@app.route("/categorias/remove")
+def remover_categoria():
     dbConn = None
     cursor = None
     try:
+        
         dbConn = psycopg2.connect(DB_CONNECTION_STRING)
         cursor = dbConn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-        balance = request.form["balance"]
-        account_number = request.form["account_number"]
-        query = "UPDATE account SET balance=%s WHERE account_number = %s"
-        data = (balance, account_number)
-        cursor.execute(query, data)
-        return query
+        categoria = request.args.get('categoria')
+        #query = "DELETE CASCADE categoria=%s;"
+        #data = (categoria)
+        #cursor.execute(query, data)
+        return render_template("test.html", cursor=categoria) #change me
     except Exception as e:
         return str(e)
     finally:
         dbConn.commit()
         cursor.close()
-        dbConn.close()'''
+        dbConn.close()
 
-@app.route("/", methods=["POST"])
-def remover_categoria():
+
+@app.route("/IVM")
+def listar_IVM():
     dbConn = None
     cursor = None
     try:
         dbConn = psycopg2.connect(DB_CONNECTION_STRING)
         cursor = dbConn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-        categoria = request.form["remove"]
-        query = "DELETE CASCADE categoria=%s;"
-        data = (categoria)
-        cursor.execute(query, data)
+        query = "SELECT * from IVM;"
+        cursor.execute(query)
+        return render_template("IVM.html", cursor=cursor)
+    except Exception as e:
+        return str(e)
+    finally:
+        dbConn.commit()
+        cursor.close()
+        dbConn.close()
+
+@app.route("/IVM/select")
+def listar_IVM_selecionada():
+    dbConn = None
+    cursor = None
+    try:
+        dbConn = psycopg2.connect(DB_CONNECTION_STRING)
+        cursor = dbConn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+        IVM = request.form["select"]
+        data = (IVM)
+        query = "SELECT * from IVM;"
+        cursor.execute(query,data)
         return query
     except Exception as e:
         return str(e)
@@ -92,6 +101,17 @@ def remover_categoria():
         dbConn.commit()
         cursor.close()
         dbConn.close()
+
+'''
+@app.route("/retalhistas")
+def change_balance():
+    try:
+        return render_template("balance.html", params=request.args)
+    except Exception as e:
+        return str(e)
+'''
+
+
 
 
 CGIHandler().run(app)
