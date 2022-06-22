@@ -17,9 +17,9 @@
                 <tr>
                     <td>{{ record[0] }}</td>
                     <td><form action="remove" method="post"></form>
-                        <a href="categorias/remove?categoria={{record[0]}}">Remover</a></td>
+                        <a href="categorias/remove?cat={{record[0]}}">Remover</a></td>
                     <td><form action="select" method="post"></form>
-                        <a href="select?categoria={{record[0]}}">Selecionar</a></td>
+                        <a href="categorias/select?cat={{record[0]}}">Selecionar</a></td>
                 </tr>
             {% endfor %}
         </tbody>

@@ -2,15 +2,15 @@
 from unicodedata import category
 from wsgiref.handlers import CGIHandler
 from flask import Flask
-from flask import render_template, request, redirect
+from flask import render_template, request, redirect, url_for
 import psycopg2
 import psycopg2.extras
 
 ## SGBD configs
 DB_HOST = "db.tecnico.ulisboa.pt"
-DB_USER = "ist195666"
+DB_USER = "ist195569"
 DB_DATABASE = DB_USER
-DB_PASSWORD = "password"
+DB_PASSWORD = "zlsh4593"
 DB_CONNECTION_STRING = "host=%s dbname=%s user=%s password=%s" % (
     DB_HOST,
     DB_DATABASE,
@@ -50,14 +50,13 @@ def remover_categoria():
     dbConn = None
     cursor = None
     try:
-        
         dbConn = psycopg2.connect(DB_CONNECTION_STRING)
         cursor = dbConn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-        categoria = request.args.get('categoria')
-        query = "DELETE CASCADE categoria=%s;"
-        data = (categoria)
+        categoria = request.args["cat"]
+        query = "DELETE FROM categoria WHERE nome=%s;"
+        data = (categoria,)
         cursor.execute(query, data)
-        return render_template("categorias.html", cursor=categoria) #change me
+        return redirect(url_for("listar_categorias"))
     except Exception as e:
         return str(e)
     finally:
@@ -72,8 +71,8 @@ def listar_categoria_selecionada():
     try:
         dbConn = psycopg2.connect(DB_CONNECTION_STRING)
         cursor = dbConn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-        categoria = request.form["select"]
-        data = (categoria)
+        categoria = request.args["cat"]
+        data = (categoria,)
         query = "SELECT * from tem_outra WHERE super_categoria=%s;"
         cursor.execute(query,data)
         return render_template("sub_cat.html", cursor=cursor)
@@ -94,7 +93,7 @@ def inserir_categoria():
         return str(e)
 
 @app.route("/categorias/inserir_subcat")
-def inserir_categoria():
+def inserir_subcategoria():
     dbConn = None
     cursor = None
     try:
@@ -113,9 +112,9 @@ def insert_categoria_intoDB():
     query = "INSERT INTO categoria VALUES (%s);"
     data = (request.form["nome"],)
     cursor.execute(query,data)
-    return redirect(url_for('categorias.html'))
+    return redirect(url_for('listar_categorias'))
   except Exception as e:
-    return redirect(url_for('erro'))
+    return str(e)
   finally:
     dbConn.commit()
     cursor.close()
@@ -130,14 +129,17 @@ def insert_categoriasub_intoDB():
     dbConn = psycopg2.connect(DB_CONNECTION_STRING)
     cursor = dbConn.cursor(cursor_factory = psycopg2.extras.DictCursor)
     query1 = "INSERT INTO categoria VALUES (%s);"
-    query2 = "INSERT INTO categoria_simples VALUES (%s,%s);"
+    query2 = "INSERT INTO categoria_simples VALUES (%s);"
+    query3 = "INSERT INTO tem_outra VALUES (%s,%s);"
     data1 = (request.form["nome"],)
-    data2 = (request.form["nome"],request.form["nome_super"],)
+    data2 = (request.form["nome"],)
+    data3 = (request.form["nome_super"],request.form["nome"],)
     cursor.execute(query1,data1)
     cursor.execute(query2,data2)
-    return redirect(url_for('categorias.html'))
+    cursor.execute(query3,data3)
+    return redirect(url_for('listar_categorias'))
   except Exception as e:
-    return redirect(url_for('erro'))
+    return str(e)
   finally:
     dbConn.commit()
     cursor.close()
@@ -167,9 +169,9 @@ def listar_IVM_selecionada():
     try:
         dbConn = psycopg2.connect(DB_CONNECTION_STRING)
         cursor = dbConn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-        IVM = request.form["select"]
-        data = (IVM)
-        query = "SELECT * from IVM=%s;"
+        IVM = request.args["IVM"]
+        data = (IVM,)
+        query = "SELECT * from evento_reposicao where num_serie=%s;"
         cursor.execute(query,data)
         return render_template("eventos_rep.html", cursor=cursor)
     except Exception as e:
@@ -196,7 +198,7 @@ def listar_retalhistas():
         dbConn.close()
 
 @app.route("/retalhistas/inserir")
-def inserir_categoria():
+def inserir_retalhista():
     dbConn = None
     cursor = None
     try:
@@ -214,9 +216,9 @@ def insert_retalhista_intoDB():
     query = "INSERT INTO retalhista VALUES (%s,%s);"
     data = (request.form["tin"],request.form["nome"],)
     cursor.execute(query,data)
-    return redirect(url_for('retalhistas.html'))
+    return redirect(url_for('listar_retalhistas'))
   except Exception as e:
-    return redirect(url_for('erro'))
+    return str(e)
   finally:
     dbConn.commit()
     cursor.close()
@@ -224,18 +226,18 @@ def insert_retalhista_intoDB():
 
 
 @app.route("/retalhistas/remove")
-def remover_categoria():
+def remover_retalhista():
     dbConn = None
     cursor = None
     try:
         
         dbConn = psycopg2.connect(DB_CONNECTION_STRING)
         cursor = dbConn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-        categoria = request.args.get('retalhista')
-        query = "DELETE CASCADE retalhista=%s;"
-        data = (categoria)
+        retalhista = request.args["retalhista"]
+        query = "DELETE FROM retalhista WHERE tin=%s;"
+        data = (retalhista,)
         cursor.execute(query, data)
-        return render_template("retalhistas.html", cursor=retalhista) 
+        return redirect(url_for('listar_retalhistas'))
     except Exception as e:
         return str(e)
     finally:

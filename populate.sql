@@ -20,19 +20,19 @@ CREATE TABLE categoria
 CREATE TABLE categoria_simples 
     (nome VARCHAR(50),
     PRIMARY KEY (nome),
-    FOREIGN KEY (nome) references categoria(nome));
+    FOREIGN KEY (nome) references categoria(nome) ON DELETE CASCADE ON UPDATE CASCADE);
 
 CREATE TABLE super_categoria 
     (nome VARCHAR(50) NOT NULL,
     PRIMARY KEY (nome),
-    FOREIGN KEY (nome) references categoria(nome));
+    FOREIGN KEY (nome) references categoria(nome) ON DELETE CASCADE ON UPDATE CASCADE);
 
 CREATE TABLE tem_outra
     (super_categoria VARCHAR(50) NOT NULL,
     categoria VARCHAR(50) NOT NULL,
     PRIMARY KEY (categoria),
-    FOREIGN KEY (super_categoria) references super_categoria(nome),
-    FOREIGN KEY (categoria) references categoria(nome),
+    FOREIGN KEY (super_categoria) references super_categoria(nome) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (categoria) references categoria(nome) ON DELETE CASCADE ON UPDATE CASCADE,
     CHECK (super_categoria != categoria));
 
 CREATE TABLE produto
@@ -40,13 +40,13 @@ CREATE TABLE produto
     cat VARCHAR(50),
     descr VARCHAR(500),
     PRIMARY KEY (ean),
-    FOREIGN KEY (cat) references categoria(nome));
+    FOREIGN KEY (cat) references categoria(nome) ON DELETE CASCADE ON UPDATE CASCADE);
 
 CREATE TABLE tem_categoria
     (ean CHAR(13),
     nome VARCHAR(50),
-    FOREIGN KEY (ean) references produto(ean),
-    FOREIGN KEY (nome) references categoria(nome));
+    FOREIGN KEY (ean) references produto(ean) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (nome) references categoria(nome) ON DELETE CASCADE ON UPDATE CASCADE);
 
 CREATE TABLE IVM
     (num_serie INTEGER,
@@ -64,8 +64,8 @@ CREATE TABLE instalada_em
     fabricante VARCHAR(50),
     loc VARCHAR(50),
     PRIMARY KEY(num_serie, fabricante),
-    FOREIGN KEY(num_serie, fabricante) references IVM(num_serie,fabricante),
-    FOREIGN KEY(loc) references ponto_de_retalho(nome));
+    FOREIGN KEY(num_serie, fabricante) references IVM(num_serie,fabricante) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY(loc) references ponto_de_retalho(nome) ON DELETE CASCADE ON UPDATE CASCADE);
 
 CREATE TABLE prateleira
     (nro INTEGER,
@@ -74,8 +74,8 @@ CREATE TABLE prateleira
     altura INTEGER,
     nome VARCHAR(50),
     PRIMARY KEY(nro, num_serie, fabricante),
-    FOREIGN KEY(num_serie, fabricante) references IVM(num_serie,fabricante),
-    FOREIGN KEY(nome) references categoria(nome));
+    FOREIGN KEY(num_serie, fabricante) references IVM(num_serie,fabricante) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY(nome) references categoria(nome) ON DELETE CASCADE ON UPDATE CASCADE);
 
 CREATE TABLE planograma
     (ean CHAR(13),
@@ -86,8 +86,8 @@ CREATE TABLE planograma
     unidades INTEGER,
     loc VARCHAR(50),
     PRIMARY KEY(ean, nro, num_serie, fabricante),
-    FOREIGN KEY(num_serie, fabricante, nro) references prateleira(num_serie,fabricante,nro),
-    FOREIGN KEY(ean) references produto(ean));
+    FOREIGN KEY(num_serie, fabricante, nro) references prateleira(num_serie,fabricante,nro) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY(ean) references produto(ean) ON DELETE CASCADE ON UPDATE CASCADE);
 
 CREATE TABLE retalhista
     (tin VARCHAR(50),
@@ -100,9 +100,9 @@ CREATE TABLE responsavel_por
     num_serie INTEGER,
     fabricante VARCHAR(50),
     PRIMARY KEY(num_serie,fabricante),
-    FOREIGN KEY(num_serie,fabricante) references IVM(num_serie,fabricante),
-    FOREIGN KEY(tin) references retalhista(tin),
-    FOREIGN KEY(nome_cat) references categoria(nome));
+    FOREIGN KEY(num_serie,fabricante) references IVM(num_serie,fabricante) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY(tin) references retalhista(tin) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY(nome_cat) references categoria(nome) ON DELETE CASCADE ON UPDATE CASCADE);
 
 CREATE TABLE evento_reposicao
     (ean CHAR(13),
@@ -113,8 +113,8 @@ CREATE TABLE evento_reposicao
     unidades INTEGER,
     tin VARCHAR(50),
     PRIMARY KEY(ean,nro,num_serie,fabricante,instante),
-    FOREIGN KEY(ean,nro,num_serie,fabricante) references planograma(ean,nro,num_serie,fabricante),
-    FOREIGN KEY(tin) references retalhista(tin));
+    FOREIGN KEY(ean,nro,num_serie,fabricante) references planograma(ean,nro,num_serie,fabricante) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY(tin) references retalhista(tin) ON DELETE CASCADE ON UPDATE CASCADE);
 
 /* ---------------------------------Populate-------------------------------------------------------------------*/
 
