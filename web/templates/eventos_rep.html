@@ -9,25 +9,29 @@
     <table border="2px">
         <thead>
             <tr>
-                <th>Nome</th>
+                <th>ean</th>
+                <th>nro</th>
+                <th>num_serie</th>
+                <th>fabricante</th>
+                <th>instante</th>
+                <th>unidades</th>
+                <th>tin</th>
             </tr>
         </thead>
         <tbody>
             {% for record in cursor %}
                 <tr>
                     <td>{{ record[0] }}</td>
-                    <td><form action="remove" method="post"></form>
-                        <a href="categorias/remove?categoria={{record[0]}}">Remover</a></td>
-                    <td><form action="select" method="post"></form>
-                        <a href="select?categoria={{record[0]}}">Selecionar</a></td>
+                    <td>{{ record[1] }}</td>
+                    <td>{{ record[2] }}</td>
+                    <td>{{ record[3] }}</td>
+                    <td>{{ record[4] }}</td>
+                    <td>{{ record[5] }}</td>
+                    <td>{{ record[6] }}</td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
-    <form action="insert"></form>
-    <a href="categorias/inserir_cat">Inserir Categoria</a>
-    <form action="insert"></form>
-    <a href="categorias/inserir_subcat">Inserir Sub-Categoria</a>
 {% else %}
     <p> Erro: não foi possível obter dados da base de dados!</p>
 {% endif %}
